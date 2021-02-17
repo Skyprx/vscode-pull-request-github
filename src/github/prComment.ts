@@ -8,7 +8,7 @@ import { IComment } from '../common/comment';
 import { IAccount } from './interface';
 import { updateCommentReactions } from './utils';
 
-export interface GHPRCommentThread {
+export interface GHPRCommentThread extends vscode.CommentThread {
 	threadId: string;
 
 	/**
@@ -37,6 +37,11 @@ export interface GHPRCommentThread {
 	 * The optional human-readable label describing the [Comment Thread](#CommentThread)
 	 */
 	label?: string;
+
+	/**
+	 * Whether the thread has been marked as resolved.
+	 */
+	isResolved: boolean;
 
 	dispose: () => void;
 }

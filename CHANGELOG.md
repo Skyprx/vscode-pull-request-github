@@ -1,5 +1,143 @@
 # Changelog
 
+## 0.23.1
+
+### Fixes
+
+- Update the new "Create Pull Request" icon to be a sharper image.
+
+## 0.23.0
+
+### Changes
+
+- Creating a pull request now uses views in the activity bar. You can enter the details of the pull request and view the diff between
+the current branch and the base branch.
+![Create a pull request](documentation/changelog/0.23.0/new-create-experience.gif)
+
+- When you publish a branch using the terminal, clicking on the resulting link can also be used to start the create pull request flow.
+![Create from terminal link](documentation/changelog/0.23.0/create-from-terminal.gif)
+
+- The command to create a pull request now also appears in the SCM view.
+
+- Add a command to copy a GitHub permalink as markdown.
+![Copy permalink as markdown](documentation/changelog/0.23.0/copy-as-markdown.gif)
+
+### Fixes
+
+- Thanks to @IllusionMH, timestamps in the commit list do not text wrap.
+
+## 0.22.0
+
+### Changes
+
+- Colored icons are used in the issues view.<br/>
+![Issues view](documentation/changelog/0.22.0/colored-icons.png)
+
+- File changes in the Pull Request view are expanded by default.
+
+- The timestamp in the pull request description has hover with the exact time.
+![Timestamp with hover](documentation/changelog/0.22.0/exact-time-hover.png)
+
+- There's a new command to "Leave Review Mode". It checks-out the default branch for the repository and remove the comment UI, just like the "Leave Review mode" button in the pull request description.
+
+- The "Description" node in the Pull Request tree has an inline action to checkout the pull request.
+
+- The Pull Request view lists the PR number first in the title, and also moves the "Draft" indication to be more prominent.
+![Pull Request view](documentation/changelog/0.22.0/pull-request-tree-view.png)
+
+- Thanks to @ejkim1996, there is an action to toggle between viewing files in a tree structure and viewing them as a flat list in the Changes in Pull Request view.<br/>
+![Toggle view layout](documentation/changelog/0.22.0/toggle-layout.png)
+
+- When a pull request is checked out, opening a file associated with it will automatically reveal this it in the CHanges in Pull Request view.
+
+### Notable fixes
+
+- Clicking on a comment link on the pull request description page now always opens the associated file.
+
+- Thanks to @KaiSforza, the `The remote <remoteName> is not a GitHub repository.` error is now surpressed for remotes outside of those set in `githubPullRequests.remotes`.
+
+## 0.21.4
+- Adopt latest API changes for TreeItem in VS Code 1.52.0
+
+## 0.21.3
+- Adopt latest API changes for VS Code 1.52.0.
+
+## 0.21.2
+
+- Revert previous changes for proposed API changes since the minimum engine version is currently set to 1.50.0.
+
+## 0.21.1
+
+- Adopt latest proposed API changes.
+## 0.21.0
+
+### Changes
+
+- GitHub permalinks in issue hovers for files that exist in your current workspace will be opened locally.
+![Open Code Link](documentation/changelog/0.21.0/openCodeLink.gif)
+
+- We are trying out a new "focused review" mode which changes the layout when you checkout a PR. You can try it with the `githubPullRequests.focusedMode` setting.
+![Focused Review Mode](documentation/changelog/0.21.0/focusedReview.png)
+
+- Issue suggestions are now shown in code comment editors.
+
+![Issue suggest in comment](documentation/changelog/0.21.0/issue-suggest-comment.png)
+
+- When you Start Working on an issue, it will be assigned to you if you permissions in the repository allow it.
+
+- Thanks to @rishab-pdx, the description page of the pull request now has an action to copy the link to the PR.
+
+### Notable fixes
+
+- Instead of showing two login buttons (one each in the Pull Requests and Issues views), we now show a login view.
+
+![Login View](documentation/changelog/0.21.0/loginView.png)
+
+- Editor tab titles are now shortened to the file name when viewing diffs from a pull request, and are suffixed with `(Pull Request)`.
+
+## 0.20.1
+
+- Fixes loading the extension in VSCode Insider's 1.50
+
+## 0.20.0
+
+### Changes
+
+- Pull requests and issues now follows a multi-repo model. This means that if you have folders in your workspace from different repositories you'll see the issues and pull requests from the repositories at the same time. You can also have pull requests checked out from multiple repositories.
+
+![Multi-repo](documentation/changelog/0.20.0/multirepo.png)
+
+- There is new setting, `githubPullRequests.pullRequestDescription`, to control how the description is set when creating a pull request. By default, this uses the pull request template in the repository if it exists, but can also be changed to use the latest commit message, a custom message input at create time, or to ask which of these options to use. Thank you to @heaths for this feature!
+
+### Notable fixes
+- GitHub Action based status checks are now rendered on the description page.
+- Commenting on stale pull requests is better handled.
+
+## 0.19.0
+
+### Changes
+
+- When you try to **Start Working on Issue** in a repository where you don't have permission to push, you now have the option to fork the repository. This flow will fork the repository and configure your remotes.
+
+![Offer Fork](documentation/changelog/0.19.0/offer-fork.png)
+
+- When attempting to push changes to a repository that you do not have permissions to push to, the extension will now prompt you to fork the repository and push to that instead.
+
+![Automatic fork repository](documentation/changelog/0.19.0/fork-github.gif)
+
+- Updated the version of @octokit/rest to ^18.0.0. This is was a big refactor, but should result in better performance.
+
+### Notable fixes
+
+- The setting `githubIssues.workingIssueBranch` is deprecated in favor of the better named `githubIssues.issueBranchTitle`.
+- The `githubIssues.issueBranchTitle` setting is now validated.
+
+## 0.18.1
+
+### Changes
+
+- Adopt latest authentication provider API changes
+
 ## 0.18.0
 
 ### Changes
@@ -11,7 +149,7 @@
 
 ![Label Suggestion](documentation/changelog/0.18.0/label-suggestion.gif)
 - Hovers work for issues formatted as GH-123.
-- The `githubIssues.workingIssueBranch` setting can take the new variable `${sanitizedIssueTitle}`.
+- The `githubIssues.issueBranchTitle` setting can take the new variable `${sanitizedIssueTitle}`.
 - If you have uncommitted changes in your issue branch when you try to create a pull request, you'll be prompted to commit them.
 
 ![Commit Prompt](documentation/changelog/0.18.0/commit-prompt.png)

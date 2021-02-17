@@ -17,6 +17,7 @@ export interface ReviewUriParams {
 	commit?: string;
 	base: boolean;
 	isOutdated: boolean;
+	rootPath: string;
 }
 
 export function fromReviewUri(uri: Uri): ReviewUriParams {
@@ -36,6 +37,17 @@ export interface PRUriParams {
 export function fromPRUri(uri: Uri): PRUriParams | undefined {
 	try {
 		return JSON.parse(uri.query) as PRUriParams;
+	} catch (e) { }
+}
+
+export interface GitHubUriParams {
+	fileName: string;
+	branch: string;
+	isEmpty?: boolean;
+}
+export function fromGitHubURI(uri: Uri): GitHubUriParams | undefined {
+	try {
+		return JSON.parse(uri.query) as GitHubUriParams;
 	} catch (e) { }
 }
 
@@ -78,13 +90,14 @@ export async function asImageDataURI(uri: Uri, repository: Repository): Promise<
 	}
 }
 
-export function toReviewUri(uri: Uri, filePath: string | undefined, ref: string | undefined, commit: string, isOutdated: boolean, options: GitUriOptions): Uri {
+export function toReviewUri(uri: Uri, filePath: string | undefined, ref: string | undefined, commit: string, isOutdated: boolean, options: GitUriOptions, rootUri: Uri): Uri {
 	const params: ReviewUriParams = {
 		path: filePath ? filePath : uri.path,
 		ref,
 		commit: commit,
 		base: options.base,
-		isOutdated
+		isOutdated,
+		rootPath: rootUri.path
 	};
 
 	let path = uri.path;
